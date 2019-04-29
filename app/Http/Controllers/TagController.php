@@ -7,7 +7,6 @@ use App\Models\Tag;
 
 class TagController extends Controller
 {
-    protected $hidden = ['created_at', 'updated_at', 'pid'];
 
     public function index() {
         return Tag::all()->toArray();;
@@ -21,6 +20,9 @@ class TagController extends Controller
         $roots = Tag::where("pid", null)->get();
         foreach($roots as $item){
             $item->children = Tag::where('pid', $item->id)->get();
+            foreach($item->children as $i) {
+                $i->children = Tag::where('pid', $i->id)->get();
+            }
         }
         return $roots;
     }
