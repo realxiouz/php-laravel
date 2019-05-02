@@ -7,8 +7,9 @@ use App\Models\Article;
 
 class ArticleController extends Controller
 {
-    public function index() {
-        return ['status' => 0, 'data' => Article::all()];
+    public function index(Request $r) {
+        $pageSize = $r -> input('pageSize');
+        return ['status' => 0, 'data' => Article::paginate($pageSize)];
     }
 
     public function store(Request $r){
@@ -32,7 +33,7 @@ class ArticleController extends Controller
         return ['status' => 0, 'msg' => 'success', 'data' => $post];
     }
 
-    public function edit(Request $r, $id) {
+    public function update(Request $r, $id) {
         $post = Article::find($id);
         $post->title= $r->input('title');
         $post->body= $r->input('body');

@@ -15,3 +15,36 @@ $hidden in model to hide arrt. See api `/api/tags`.
 `$table->dropColumn('tag_id');`
 `$table->char('tag_ids', 100)->nullable()->comment('文章标签')；`
 `php artisan migrate`
+
+### day-3
+
+#### http methods
+
+| http方法 | url | 动作 |
+| ------ | ------ | ------ |
+| GET | /tags | index |
+| POST | /tags/{id} | store |
+| PUT/PATCH | /tags/{id} | update |
+| DELETE | /tags/{id} | destroy |
+| GET | /tags/{id} | show |
+
+#### softDelete
+1. `$table->softDeletes()` 数据库添加deleted_at字段；
+2. 模型使用softDeletes
+```
+<?php
+namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+class Gather extends Model
+{
+    use SoftDeletes;
+
+}
+```
+3. 控制器删除或者恢复 `Gather::withTrashed()->find($id)->restore();` `Gather::find($id)->destroy();`
+
+#### paginate
+`Tags::paginate($pageSize);` 页数->page /api/tags?page=1&pageSize=10
+
+#### 文件上传
