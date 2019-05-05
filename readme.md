@@ -48,3 +48,14 @@ class Gather extends Model
 `Tags::paginate($pageSize);` 页数->page /api/tags?page=1&pageSize=10
 
 #### 文件上传
+
+### day-4
+
+#### Eloquent: 序列化
+1. 模型添加 `$appends` 属性 `protected $appends = ['children']`
+2. 模型添加属性对应方法
+```
+public function getChildrenAttribute(){
+    return $this->where('pid', $this->id)->get()->count() ? $this->where('pid', $this->id)->get() : null;
+}
+```

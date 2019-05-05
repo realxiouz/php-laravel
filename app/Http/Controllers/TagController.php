@@ -10,20 +10,20 @@ class TagController extends Controller
 
     public function index() {
         $roots = Tag::where("pid", null)->get();
-        foreach($roots as $item){
+        // foreach($roots as $item){
 
-            // $item->children = Tag::where('pid', $item->id)->get();
-            // foreach($item->children as $i) {
-            //     $i->children = Tag::where('pid', $i->id)->get();
-            // }
+        //     // $item->children = Tag::where('pid', $item->id)->get();
+        //     // foreach($item->children as $i) {
+        //     //     $i->children = Tag::where('pid', $i->id)->get();
+        //     // }
 
-            Tag::where('pid', $item->id)->get()->count() ? $item->children = Tag::where('pid', $item->id)->get() : '';
-            if ($item->children) {
-                foreach($item->children as $i) {
-                    Tag::where('pid', $i->id)->get()->count() ? $i->children = Tag::where('pid', $i->id)->get() : '';
-                }
-            }
-        }
+        //     Tag::where('pid', $item->id)->get()->count() ? $item->children = Tag::where('pid', $item->id)->get() : '';
+        //     if ($item->children) {
+        //         foreach($item->children as $i) {
+        //             Tag::where('pid', $i->id)->get()->count() ? $i->children = Tag::where('pid', $i->id)->get() : '';
+        //         }
+        //     }
+        // }
         return ['status' => 0, 'msg' => 'success', 'data' => $roots];
     }
 

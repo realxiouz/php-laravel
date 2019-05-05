@@ -21,4 +21,16 @@ class SayController extends Controller
         $data = Say::withTrashed()->paginate($pageSize);
         return ['status'=>0, 'data'=>$data];
     }
+
+    public function update(Request $r, $id) {
+        $say = Say::withTrashed()->find($id);
+        $say->content = $r->input('content');
+        $say->img = $r->input('img');
+        $say->save();
+        return ['status'=>0];
+    }
+
+    public function show(Request $r, $id) {
+        return ['status'=>0, 'data'=>Say::withTrashed()->find($id)];
+    }
 }
