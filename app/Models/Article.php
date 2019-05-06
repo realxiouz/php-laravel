@@ -14,4 +14,6 @@ class Article extends Model
     public function tag() {
         return $this -> belongsTo('App\Models\Tag');
     }
+
+    protected $fillable = ['title', 'body', 'user_id', 'tag_ids', 'markdown'];
 }

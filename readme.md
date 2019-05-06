@@ -59,3 +59,19 @@ public function getChildrenAttribute(){
     return $this->where('pid', $this->id)->get()->count() ? $this->where('pid', $this->id)->get() : null;
 }
 ```
+
+### day-5
+
+1. 模型定义$fillable字段 `protected $fillable = ['title', 'body', 'markdown', 'tag_ids', 'user_id']`
+2. 直接使用模型 save方法，创建数据；
+```
+$data = $r->validate([
+    'title' => 'required',
+    'body' => 'required',
+    'markdown' => 'required',
+    'tag_ids' => 'required|array'
+]);
+$data['user_id'] = 1;
+$data['tag_ids'] = json_encode($data['tag_ids']);
+$post = new Article($data);
+```

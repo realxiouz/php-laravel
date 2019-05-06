@@ -13,18 +13,23 @@ class ArticleController extends Controller
     }
 
     public function store(Request $r){
-        $r->validate([
+        $data = $r->validate([
             'title' => 'required',
             'body' => 'required',
+            'markdown' => 'required',
+            'tag_ids' => 'required|array'
         ]);
-        $post = new Article;
-        $post->title= $r->input('title');
-        $post->body= $r->input('body');
-        $post->user_id= 1;
-        $post->tag_ids =json_encode( $r -> input('tag_ids') );
-        $post->markdown = $r -> input('markdown');
+        $data['user_id'] = 1;
+        $data['tag_ids'] = json_encode($data['tag_ids']);
+        $post = new Article($data);
+        // $post = new Article;
+        // $post->title= $r->input('title');
+        // $post->body= $r->input('body');
+        // $post->user_id= 1;
+        // $post->tag_ids =json_encode( $r -> input('tag_ids') );
+        // $post->markdown = $r -> input('markdown');
         $post->save();
-        return ['status' => 0, 'msg' => 'success'];
+        return ['status' => 0, 'msg' => 'success', 'data' => []];
     }
 
     public function show(Request $r, $id) {
