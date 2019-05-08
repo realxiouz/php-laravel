@@ -11,6 +11,14 @@
 |
 */
 
+use \App\Models\Tag;
+
 Route::get('/', function () {
+    $data = Tag::where('pid', null)->get();
+    dump($data);
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

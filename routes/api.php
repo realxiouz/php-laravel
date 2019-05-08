@@ -22,10 +22,10 @@ Route::get('/tags/{id}', 'TagController@show');
 Route::post('/tags', 'TagController@store');
 Route::delete('/tags/{id}', 'TagController@destroy');
 
-Route::apiResource('articles', 'ArticleController');
+// Route::apiResource('articles', 'ArticleController');
 // Route::post('/articles', 'ArticleController@store');
 // Route::put('/articles/{id}', 'ArticleController@edit');
-// Route::get('/articles', 'ArticleController@index');
+Route::middleware('auth:api')->get('/articles', 'ArticleController@index');
 // Route::get('/articles/{id}', 'ArticleController@show');
 
 Route::apiResource('gathers', 'GatherController');
@@ -33,6 +33,8 @@ Route::apiResource('gathers', 'GatherController');
 Route::post('/upload', 'UploadController@store');
 
 Route::apiResource('says', 'SayController');
+
+Route::post('/user/login', 'Auth\LoginController@authenticate');
 
 
 
