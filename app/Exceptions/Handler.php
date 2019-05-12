@@ -5,6 +5,10 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\AuthenticationException;
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -44,8 +48,33 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        return parent::render($request, $exception);
+        // dump(get_class($e));
+        dump($e);
+        if ($e instanceof NotFoundHttpException) {
+            return response()->json([
+                'status' => 1,
+                'msg' => 'not found error'
+            ]);
+        }
+        if ($e instanceof AuthenticationException) {
+            return response()->json([
+                'status' => 1,
+                'msg' => 'auth error'
+            ]);
+        }
+        if ($e instanceof ValidationException) {
+            return response()->json([
+                'status' => 1,
+                'msg' => 'validate error'
+            ]);
+        }
+        return response()->json([
+            'status' => 1,
+            'msg' => 'server error'
+        ]);
+        
+        return parent::render($request, $e);
     }
 }
