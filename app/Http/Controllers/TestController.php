@@ -45,4 +45,21 @@ class TestController extends Controller
             'msg' => 'ip ok'
         ];
     }
+
+    public function test(Request $r) {
+        // return [
+        //     'status' => 0,
+        //     'data' => TestController::class, // test class
+        //     'msg' => 'ip ok'
+        // ];
+    }
+
+    public function event() {
+        event(new \App\Events\TestEvent());
+        return [
+            'status' => 0,
+            'data' => [],
+            'msg' => 'event ok'
+        ];
+    }
 }
