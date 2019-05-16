@@ -10,32 +10,28 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class TestEvent implements ShouldBroadcast
+class LoginEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $user;
+
+    public function __construct($user)
     {
-        //
+        $this->$user = $user;
+        // dd($this->$user->name);
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
     public function broadcastOn()
     {
-        return new Channel('test-echo');
+        return new Channel('auth');
     }
 
     public function broadcastWith()
     {
-        return ['time' => now(), 'title' => 'event open', 'desc' => '自定义时长，为 0 则不自动关闭。也可以在Notice.config()中全局配置，详见API。'];
+        return [
+          'title' => "登录成功",
+          'desc' => '......'
+        ];
     }
 }

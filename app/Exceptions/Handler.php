@@ -61,7 +61,8 @@ class Handler extends ExceptionHandler
         if ($e instanceof AuthenticationException) {
             return response()->json([
                 'status' => 1,
-                'msg' => 'auth error'
+                'msg' => 'auth error',
+                'code' => 403
             ]);
         }
         if ($e instanceof ValidationException) {

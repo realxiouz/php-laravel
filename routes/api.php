@@ -22,7 +22,7 @@ Route::get('/tags/{id}', 'TagController@show');
 Route::post('/tags', 'TagController@store');
 Route::delete('/tags/{id}', 'TagController@destroy');
 
-Route::apiResource('articles', 'ArticleController');
+Route::apiResource('articles', 'ArticleController')->middleware('auth:api');
 // Route::post('/articles', 'ArticleController@store');
 // Route::put('/articles/{id}', 'ArticleController@edit');
 // Route::middleware('auth:api')->get('/articles', 'ArticleController@index');

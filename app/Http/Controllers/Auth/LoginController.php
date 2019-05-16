@@ -44,6 +44,8 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         
         if (Auth::attempt($credentials)) {
+            Auth::user()->generateToken();
+            event(new \App\Events\LoginEvent(Auth::user()));
             return [
                 'status' => 0,
                 'data' => Auth::user()

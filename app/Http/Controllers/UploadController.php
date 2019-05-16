@@ -12,6 +12,9 @@ class UploadController extends Controller
         $path = $r->file('file')->store($folderName);
 
         $url = Storage::url($path);
+
+        // $path1 = Storage::disk('public')->put('test/123',$r->file('file'));
+        // dd($url, $path1);
         return ['status'=>0, 'data'=>$url];
     }
 }
