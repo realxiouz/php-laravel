@@ -51,7 +51,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         // dump(get_class($e));
-        dump($e);
+        // dump($e);
         if ($e instanceof NotFoundHttpException) {
             return response()->json([
                 'status' => 1,

@@ -18,7 +18,7 @@ class LoginEvent implements ShouldBroadcast
 
     public function __construct($user)
     {
-        $this->$user = $user;
+        $this->user = $user;
         // dd($this->$user->name);
     }
 
@@ -30,7 +30,7 @@ class LoginEvent implements ShouldBroadcast
     public function broadcastWith()
     {
         return [
-          'title' => "登录成功",
+          'title' => "登录成功".$this->user->name,
           'desc' => '......'
         ];
     }
