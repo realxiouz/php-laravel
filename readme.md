@@ -75,3 +75,9 @@ $data['user_id'] = 1;
 $data['tag_ids'] = json_encode($data['tag_ids']);
 $post = new Article($data);
 ```
+### day-6
+1. git clone your-project-path
+2. cd work-dir
+3. composer install
+4. cp .env.example .env
+5. php artisan key:generate 

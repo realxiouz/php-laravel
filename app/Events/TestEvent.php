@@ -14,14 +14,11 @@ class TestEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $user;
+
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -31,11 +28,15 @@ class TestEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('test-echo');
+        return new PrivateChannel('User'.$this->user->id);
     }
 
     public function broadcastWith()
     {
-        return ['time' => now(), 'title' => 'event open', 'desc' => '自定义时长，为 0 则不自动关闭。也可以在Notice.config()中全局配置，详见API。'];
+        return [
+            'time' => now(),
+            'title' => '私信请查收'.$this->user->name,
+            'desc' => ''
+        ];
     }
 }

@@ -42,7 +42,7 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        
+
         if (Auth::attempt($credentials)) {
             Auth::user()->generateToken();
             event(new \App\Events\LoginEvent(Auth::user()));
@@ -57,5 +57,11 @@ class LoginController extends Controller
                 'data' => []
             ];
         }
+    }
+
+    public function out(Request $r) {
+        $user1 = $r->user();
+        $user=Auth::user();
+        dd($user1);
     }
 }

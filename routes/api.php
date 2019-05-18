@@ -35,13 +35,15 @@ Route::post('/upload', 'UploadController@store');
 Route::apiResource('says', 'SayController');
 
 Route::post('/user/login', 'Auth\LoginController@authenticate');
+Route::post('/user/logout/{id}', 'ApiTokenController@logout');
+
 
 Route::get('/test/auth', 'TestController@auth')->middleware('auth:api');
 Route::get('/test/query', 'TestController@query');
 Route::get('/test/notfound', 'TestController@notFound');
 Route::get('/test/ip', 'TestController@ip');
 Route::get('/test/test', 'TestController@test');
-Route::get('/test/event', 'TestController@event');
+Route::get('/test/event/{id}', 'TestController@event');
 
 
 

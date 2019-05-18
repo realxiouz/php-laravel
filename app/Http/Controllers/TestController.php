@@ -54,8 +54,8 @@ class TestController extends Controller
         // ];
     }
 
-    public function event() {
-        event(new \App\Events\TestEvent());
+    public function event($id) {
+        event(new \App\Events\TestEvent(\App\User::find($id)));
         return [
             'status' => 0,
             'data' => [],

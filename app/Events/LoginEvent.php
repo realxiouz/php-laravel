@@ -24,14 +24,14 @@ class LoginEvent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new Channel('auth');
+        return new Channel('login');
     }
 
     public function broadcastWith()
     {
         return [
-          'title' => "登录成功".$this->user->name,
-          'desc' => '......'
+          'title' => $this->user->name.'已上线',
+          'desc' => "登录时间: ".now()
         ];
     }
 }
